@@ -6,6 +6,8 @@ from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 from db import db
+import os
+import re
 
 
 
@@ -15,7 +17,11 @@ app.secret_key = "key"
 #jwt = JWT(app, authenticate, identity)  #/auth
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["SQLALCHEMY_TRACK_MODEFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
+#app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"   #This line is remove because it causes problem in Heroku deployment and according to him it should be removed and the following 4 lines
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+# rest of connection code using the connection string `uri`
 
 
 '''
