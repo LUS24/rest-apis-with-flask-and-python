@@ -41,7 +41,7 @@ api.add_resource(StoreList, '/stores')
 api.add_resource(UserRegister, "/register")
 
 if __name__ == "__main__":
-    #db.init_app(app)  #I got this line outside the if statement because i faced an issue with heroku and one of the students mention that he solved the issue by this way
+    db.init_app(app)  #I got this line outside the if statement because i faced an issue with heroku and one of the students mention that he solved the issue by this way
     app.run(port = 5000, debug= True)
 
 """  #This block because i faced an issue with heroku so i accessed his "app.py" file to find these lines exist.
