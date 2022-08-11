@@ -1,4 +1,4 @@
-from distutils.command.config import config
+#from distutils.command.config import config
 from flask import Flask
 from flask_restful import Api
 #from flask_jwt import JWT, jwt_required
