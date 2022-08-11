@@ -18,12 +18,20 @@ app.secret_key = "key"
 #jwt = JWT(app, authenticate, identity)  #/auth
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config["SQLALCHEMY_TRACK_MODEFICATIONS"] = False
+
+uri = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
+
+"""  #Note: the four lines above is to replace these lines since it causes problems in Heroku taken from QA
 #app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///data.db")  #It was "app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db""
 #Note: "os.environ.get("DATABASE_URL", "sqlite:///data.db")" if heroku database postgres didn't work for any reason, then the local sqlite3 will do.
-uri = os.getenv("DATABASE_URL")  #The line "app.config["SQLALCHEMY_DATABASE_URI"]" is remove because it causes problem in Heroku deployment and according to him it should be removed and the following 4 lines or other relevant config var
+uri = os.getenv("DATABASE_URL")  #The line "app.config["SQLALCHEMY_DATABASE_URI"]" is remove because it causes problem in Heroku deployment and according to him it should be removed and the following 4 lines 
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 # rest of connection code using the connection string `uri`
+"""
 
 
 '''
