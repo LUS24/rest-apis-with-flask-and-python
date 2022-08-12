@@ -32,14 +32,6 @@ if uri.startswith("postgres://"):
 """
 
 
-'''
-class Student(Resource):
-    def get(self, name):
-        return {"student": name}
-
-api.add_resource(Student, "/student/<string:name>")
-'''
-
 api.add_resource(Item, "/item/<string:name>")
 api.add_resource(ItemList, "/items")
 api.add_resource(Store, '/store/<string:name>')
